@@ -55,4 +55,15 @@ public class ProdutosDAO {
         }
     }
 
+    void venderProduto(int id) {
+        try {
+            conn = new conectaDAO().connectDB();
+            prep = conn.prepareStatement("UPDATE produtos SET status = 'Vendido' WHERE id = ?");
+            prep.setInt(1, id);
+            prep.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
