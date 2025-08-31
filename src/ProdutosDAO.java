@@ -22,7 +22,7 @@ public class ProdutosDAO {
     public void cadastrarProduto(ProdutosDTO produto) {
         try {
             conn = new conectaDAO().connectDB();
-            prep = conn.prepareStatement("INSERT INTO produtos (nome, valor, status) values (?, ?, ?)");
+            prep = conn.prepareStatement("INSERT INTO produtos (nome, valor, status) values (?, ?, ?);");
             prep.setString(1, produto.getNome());
             prep.setDouble(2, produto.getValor());
             prep.setString(3, produto.getStatus());
@@ -36,7 +36,7 @@ public class ProdutosDAO {
     public ArrayList<ProdutosDTO> listarProdutos() {
         try {
             conn = new conectaDAO().connectDB();
-            prep = conn.prepareStatement("SELECT * FROM produtos");
+            prep = conn.prepareStatement("SELECT * FROM produtos;");
             resultset = prep.executeQuery();
 
             while (resultset.next()) {
@@ -55,4 +55,36 @@ public class ProdutosDAO {
         }
     }
 
+    public void venderProduto(int id) {
+        try {
+            conn = new conectaDAO().connectDB();
+            prep = conn.prepareStatement("UPDATE produtos SET status = 'Vendido' WHERE id = ?;");
+            prep.setInt(1, id);
+            prep.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public ArrayList<ProdutosDTO> buscarProdutosVendidos() {
+        try {
+            conn = new conectaDAO().connectDB();
+            prep = conn.prepareStatement("SELECT * FROM produtos WHERE status = 'Vendido';");
+            resultset = prep.executeQuery();
+
+            while (resultset.next()) {
+                ProdutosDTO produto = new ProdutosDTO();
+                produto.setId(resultset.getInt("id"));
+                produto.setNome(resultset.getString("nome"));
+                produto.setValor(resultset.getDouble("valor"));
+                produto.setStatus(resultset.getString("status"));
+                listagem.add(produto);
+            }
+            return listagem;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 }
