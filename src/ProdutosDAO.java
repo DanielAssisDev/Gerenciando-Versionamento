@@ -20,9 +20,17 @@ public class ProdutosDAO {
     ArrayList<ProdutosDTO> listagem = new ArrayList<>();
 
     public void cadastrarProduto(ProdutosDTO produto) {
-
+        try {
+        conn = new conectaDAO().connectDB();
+        prep = conn.prepareStatement("INSERT INTO produtos (nome, valor, status) values (?, ?, ?)");
+        prep.setString(1, produto.getNome());
+        prep.setDouble(2, produto.getValor());
+        prep.setString(3, produto.getStatus());
+        prep.execute();
         
-        //conn = new conectaDAO().connectDB();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         
         
     }
