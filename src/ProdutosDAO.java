@@ -69,7 +69,7 @@ public class ProdutosDAO {
     public ArrayList<ProdutosDTO> buscarProdutosVendidos() {
         try {
             conn = new conectaDAO().connectDB();
-            prep = conn.prepareStatement("SELECT * FROM produtos WHERE status = 'Vendido'");
+            prep = conn.prepareStatement("SELECT * FROM produtos WHERE status = 'Vendido';");
             resultset = prep.executeQuery();
 
             while (resultset.next()) {
