@@ -160,7 +160,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
             System.out.println(e);
             JOptionPane.showMessageDialog(null, "Ocorreu um erro no cadastro, tente novamente.");
         }
-
+        
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
