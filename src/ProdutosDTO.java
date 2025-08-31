@@ -10,7 +10,7 @@
 public class ProdutosDTO {
     private Integer id;
     private String nome;
-    private int valor;
+    private Double valor;
     private String status;
 
     public Integer getId() {
@@ -21,7 +21,7 @@ public class ProdutosDTO {
         return nome;
     }
 
-    public int getValor() {
+    public Double getValor() {
         return valor;
     }
 
@@ -37,7 +37,7 @@ public class ProdutosDTO {
         this.nome = nome;
     }
 
-    public void setValor(int valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 
