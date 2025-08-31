@@ -21,59 +21,16 @@ public class ProdutosDAO {
 
     public void cadastrarProduto(ProdutosDTO produto) {
 
-        try {
-            conn = new conectaDAO().connectDB();
-            prep = conn.prepareStatement("INSERT INTO produtos (nome, valor, status) values (?, ?, ?)");
-            prep.setString(1, produto.getNome());
-            prep.setDouble(2, produto.getValor());
-            prep.setString(3, "à venda");
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
-    public ProdutosDTO getProduto(int id) {
-        try {
-            conn = new conectaDAO().connectDB();
-            prep = conn.prepareStatement("SELECT * FROM produtos WHERE id = ?");
-            prep.setInt(1, id);
-            resultset = prep.executeQuery();
-
-            ProdutosDTO produto = new ProdutosDTO();
-            produto.setId(resultset.getInt("id"));
-            produto.setNome(resultset.getString("nome"));
-            produto.setValor(resultset.getDouble("valor"));
-            produto.setStatus(resultset.getString("status"));
-
-            return produto;
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
+        
+        //conn = new conectaDAO().connectDB();
+        
+        
     }
 
     public ArrayList<ProdutosDTO> listarProdutos() {
-        try {
-            conn = new conectaDAO().connectDB();
-            prep = conn.prepareStatement("SELECT * FROM produtos");
-            resultset = prep.executeQuery();
-
-            while (resultset.next()) {
-                ProdutosDTO produto = new ProdutosDTO();
-                produto.setId(resultset.getInt("id"));
-                produto.setNome(resultset.getString("nome"));
-                produto.setValor(resultset.getDouble("valor"));
-                produto.setStatus(resultset.getString("status"));
-                listagem.add(produto);
-            }
-
-            return listagem;
-
-        } catch (Exception e) {
-            System.out.println(e);
-            return null;
-        }
+        
+        return listagem;
+        
     }
 
 }
