@@ -21,24 +21,38 @@ public class ProdutosDAO {
 
     public void cadastrarProduto(ProdutosDTO produto) {
         try {
-        conn = new conectaDAO().connectDB();
-        prep = conn.prepareStatement("INSERT INTO produtos (nome, valor, status) values (?, ?, ?)");
-        prep.setString(1, produto.getNome());
-        prep.setDouble(2, produto.getValor());
-        prep.setString(3, produto.getStatus());
-        prep.execute();
-        
+            conn = new conectaDAO().connectDB();
+            prep = conn.prepareStatement("INSERT INTO produtos (nome, valor, status) values (?, ?, ?)");
+            prep.setString(1, produto.getNome());
+            prep.setDouble(2, produto.getValor());
+            prep.setString(3, produto.getStatus());
+            prep.execute();
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
-        
     }
 
     public ArrayList<ProdutosDTO> listarProdutos() {
-        
-        return listagem;
-        
+        try {
+            conn = new conectaDAO().connectDB();
+            prep = conn.prepareStatement("SELECT * FROM produtos");
+            resultset = prep.executeQuery();
+
+            while (resultset.next()) {
+                ProdutosDTO produto = new ProdutosDTO();
+                produto.setId(resultset.getInt("id"));
+                produto.setNome(resultset.getString("nome"));
+                produto.setValor(resultset.getDouble("valor"));
+                produto.setStatus(resultset.getString("status"));
+                listagem.add(produto);
+            }
+            return listagem;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
 }
